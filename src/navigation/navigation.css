@@ -1,0 +1,10 @@
+.navigation {
+    height:75px;
+    background-color: red;
+    text-align: right;
+}
+
+.resetBtn {
+    margin-top: 2em;
+    margin-right: 2em;
+}
