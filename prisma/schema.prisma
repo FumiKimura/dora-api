@@ -9,3 +9,20 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Gadget {
+  id    Int         @id @default(autoincrement())
+  name  String      @unique
+  type  String
+  users Character[]
+}
+
+model Character {
+  id        Int     @id @default(autoincrement())
+  firstname String
+  lastname  String?
+  species   String
+  age       Int
+  Gadget    Gadget? @relation(fields: [gadgetId], references: [id])
+  gadgetId  Int?
+}
