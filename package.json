@@ -21,7 +21,7 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "ts-node src/index.tx",
+    "start": "ts-node server/index.ts",
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
     "react-test": "react-scripts test",
