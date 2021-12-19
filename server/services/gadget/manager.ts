@@ -27,13 +27,15 @@ class GadgetManager{
         return Promise.resolve(gadgets);
     }
 
-    // public async getGadgetById(id: number): Promise<Gadget> {
-    //     const gadget = await this.gadgetRepository.findOne({
-    //         relations:["owner","characters"],
-    //         where: {id:id}
-    //     });
-    //     return Promise.resolve(gadget);
-    // }
+    public async getGadgetById(id: number): Promise<Gadget | null> {
+        const gadget = await this.prisma.gadget.findUnique({
+            where: {id:id},
+            include: {
+                users: true
+            },
+        });
+        return Promise.resolve(gadget);
+    }
 
     // public async postNewGadget(partial: Gadget, owner: number, characters: Array<number>): Promise<Gadget> {
     //     const characterManager = new CharacterManager();
