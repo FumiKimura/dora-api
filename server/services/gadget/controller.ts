@@ -15,8 +15,8 @@ class GadgetController {
     protected setupRoute(){
         const router = Router();
         router.get("/allgadget", this.getAllGadgets);
-        // router.get("/gadgetlist", this.getGadgetList);
-        // router.get("/gadgetbyid", this.getGadgetById);
+        router.get("/gadgetlist", this.getGadgetList);
+        // router.get("/gadgetbyid", this.manaager.getGadgetById);
         // router.post("", this.postNewGadget);
         // router.patch("", this.updateGadget);
         // router.delete("", this.deleteGadget);
@@ -28,17 +28,17 @@ class GadgetController {
         res.send(gadget);
     }
 
-    // protected getGadgetList = async (req: Request, res:Response): Promise<void> => {
-    //     let gadget;
-    //     const { num } = req.query;
-    //     if(num === undefined){
-    //         gadget = await this.manager.getAllGadget();
-    //         res.send(gadget);
-    //     }else{
-    //         gadget = await this.manager.getGadgetList(parseInt(num as string));
-    //         res.send(gadget);
-    //     }
-    // }
+    protected getGadgetList = async (req: Request, res:Response): Promise<void> => {
+        let gadget;
+        const { num } = req.query;
+        if(num === undefined){
+            gadget = await this.manager.getAllGadget();
+            res.send(gadget);
+        }else{
+            gadget = await this.manager.getGadgetList(parseInt(num as string));
+            res.send(gadget);
+        }
+    }
 
     // protected getGadgetById = async (req: Request, res:Response): Promise<void> => {
     //     const { id } = req.query;

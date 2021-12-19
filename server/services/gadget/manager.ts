@@ -17,13 +17,15 @@ class GadgetManager{
         return Promise.resolve(allGadgets);
     }
 
-    // public async getGadgetList(num: number): Promise<Gadget[]> {
-    //     const gadgets = await this.gadgetRepository.find({
-    //         relations:["owner","characters"],
-    //         take: num
-    //     });
-    //     return Promise.resolve(gadgets);
-    // }
+    public async getGadgetList(num: number): Promise<Gadget[]> {
+        const gadgets = await this.prisma.gadget.findMany({
+            include: {
+                users: true
+            },
+            take: num
+        });
+        return Promise.resolve(gadgets);
+    }
 
     // public async getGadgetById(id: number): Promise<Gadget> {
     //     const gadget = await this.gadgetRepository.findOne({
