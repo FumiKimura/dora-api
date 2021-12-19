@@ -20,7 +20,7 @@ class GadgetController {
         router.get("/gadgetbyid", this.getGadgetById);
         router.post("", this.postNewGadget);
         // router.patch("", this.updateGadget);
-        // router.delete("", this.deleteGadget);
+        router.delete("", this.deleteGadget);
         return router;
     }
 
@@ -82,11 +82,11 @@ class GadgetController {
     //     }
     // }
 
-    // protected deleteGadget = async (req: Request, res: Response): Promise<void> => {
-    //     const id = req.query.id;
-    //     const response = await this.manager.deleteGadget(parseInt(id as string));
-    //     !response ? res.sendStatus(404):res.send(response);
-    // }
+    protected deleteGadget = async (req: Request, res: Response): Promise<void> => {
+        const id = req.query.id;
+        const response = await this.manager.deleteGadget(parseInt(id as string));
+        !response ? res.sendStatus(404):res.send(response);
+    }
 }
 
 export default GadgetController;

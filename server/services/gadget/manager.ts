@@ -1,5 +1,4 @@
-import { PrismaClient, Gadget, Character } from "@prisma/client";
-import GadgetController from "./controller";
+import { PrismaClient, Gadget } from "@prisma/client";
 
 
 class GadgetManager{    
@@ -97,14 +96,14 @@ class GadgetManager{
     //     return Promise.resolve(update);
     // }
 
-    // public async deleteGadget(id: number): Promise<Gadget> {
-    //     const gadget = await this.gadgetRepository.findOne({
-    //         relations:["owner","characters"],
-    //         where: {id:id}
-    //     });
-    //     if(gadget) await this.gadgetRepository.delete({id: id});
-    //     return Promise.resolve(gadget);
-    // }
+    public async deleteGadget(id: number): Promise<Gadget> {
+        const deletedGadget = await this.prisma.gadget.delete({
+            where: {
+                id: id
+            }
+        })
+        return Promise.resolve(deletedGadget);
+    }
 }
 
 export default GadgetManager;
