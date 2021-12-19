@@ -1,5 +1,6 @@
 import { Router, Request, Response } from "express";
 import GadgetManager from "./manager";
+import { Gadget } from "@prisma/client";
 
 
 class GadgetController {
@@ -17,7 +18,7 @@ class GadgetController {
         router.get("/allgadget", this.getAllGadgets);
         router.get("/gadgetlist", this.getGadgetList);
         router.get("/gadgetbyid", this.getGadgetById);
-        // router.post("", this.postNewGadget);
+        router.post("", this.postNewGadget);
         // router.patch("", this.updateGadget);
         // router.delete("", this.deleteGadget);
         return router;
@@ -50,19 +51,15 @@ class GadgetController {
         }
     }
 
-    // protected postNewGadget = async (req: Request, res:Response): Promise<void> => {
-    //     try{
-    //         const newGadget: Gadget = new Gadget();
-    //         newGadget.gadgetName = req.body.gadgetName; 
-    //         newGadget.gadgetType = req.body.gadgetType;
-    //         const owner = parseInt(req.body.owner);
-    //         const characters = req.body.characters.map(id => parseInt(id));
-    //         res.send(await this.manager.postNewGadget(newGadget, owner, characters));
-    //     }catch(e){
-    //         console.log(e);
-    //         res.sendStatus(400);
-    //     }
-    // }
+    protected postNewGadget = async (req: Request, res:Response): Promise<void> => {
+        try{
+            const {name, type, users} = req.body;
+            res.send(await this.manager.postNewGadget(name, type, users));
+        }catch(e){
+            console.log(e);
+            res.sendStatus(400);
+        }
+    }
 
     // protected updateGadget = async (req: Request, res:Response): Promise<void> => {
     //     try {

@@ -12,6 +12,7 @@ class App {
         this.app = express();
         this.port = port || App.DEFAULT_PORT;
         this.app.use(cors());
+        this.app.use(express.json())
         this.app.use(rootService.path, rootService.router);
         this.app.use(rootService.path, express.static(rootService.filepath));
         this.app.use(gadgetService.path, gadgetService.router);
