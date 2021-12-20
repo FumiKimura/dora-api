@@ -11,30 +11,52 @@ class GadgetManager{
     public async getAllGadget(): Promise<Gadget[]> {
         const allGadgets = await this.prisma.gadget.findMany({
             include: {
-                users: true,
+                users: {
+                    include: {
+                        user:true
+                    }
+                }
             },
         });
-        return Promise.resolve(allGadgets);
+
+        const result = allGadgets.map((user) => {
+            return { ...user, users: user.users.map((user) => user.user) }
+        })
+        return Promise.resolve(result);
     }
 
     public async getGadgetList(num: number): Promise<Gadget[]> {
         const gadgets = await this.prisma.gadget.findMany({
             include: {
-                users: true
+                users: {
+                    include: {
+                        user:true
+                    }
+                }
             },
             take: num
         });
-        return Promise.resolve(gadgets);
+        const result = gadgets.map((user) => {
+            return { ...user, users: user.users.map((user) => user.user) }
+        })
+        return Promise.resolve(result);
     }
 
-    public async getGadgetById(id: number): Promise<Gadget | null> {
-        const gadget = await this.prisma.gadget.findUnique({
+    public async getGadgetById(id: number): Promise<Gadget[] | null> {
+        const gadget = await this.prisma.gadget.findMany({
             where: {id:id},
             include: {
-                users: true
+                users: {
+                    include: {
+                        user:true
+                    }
+                }
             },
         });
-        return Promise.resolve(gadget);
+        const result = gadget.map((user) => {
+            return { ...user, users: user.users.map((user) => user.user) }
+        })
+        return Promise.resolve(result);
     }
 
     public async postNewGadget(name:string, type:string, userId:number[]): Promise<Gadget[]>{
