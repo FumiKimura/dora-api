@@ -21,7 +21,7 @@ class GadgetManager{
 
         const result = allGadgets.map((user) => {
             return { ...user, users: user.users.map((user) => user.user) }
-        })
+        });
         return Promise.resolve(result);
     }
 
@@ -38,7 +38,7 @@ class GadgetManager{
         });
         const result = gadgets.map((user) => {
             return { ...user, users: user.users.map((user) => user.user) }
-        })
+        });
         return Promise.resolve(result);
     }
 
@@ -55,47 +55,27 @@ class GadgetManager{
         });
         const result = gadget.map((user) => {
             return { ...user, users: user.users.map((user) => user.user) }
-        })
+        });
         return Promise.resolve(result);
     }
 
-    public async postNewGadget(name:string, type:string, userId:number[]): Promise<Gadget[]>{
-        interface newCharacter {
-            firstname: string
-            lastname: string | null
-            species: string
-            age: number
-            gadgetId: number | null
-        }
+    public async postNewGadget(name:string, type:string, userIds:number[]): Promise<Gadget[]>{
+        const users = userIds.map((id) => {
+            return {user:{connect:{id:id}}};
+        });
 
-        let characters: newCharacter[] = [
-            {firstname: "Doraemon", lastname: null, species: "Robot Cat", age: -91, gadgetId: null},
-            {firstname: "Nobita", lastname: "Nobi", species: "Human", age: 10, gadgetId: null},
-            {firstname: "Dorami", lastname: null, species: "Robot Cat", age: -94, gadgetId: null},
-            {firstname: "Kuruto", lastname: "Hartman", species: "Human", age: 10, gadgetId: null},
-            {firstname: "Suneo", lastname: "Honekawa", species: "Human", age: 10, gadgetId: null},
-            {firstname: "Takeshi", lastname: "Goda", species: "Human", age: 10, gadgetId: null},
-            {firstname: "Shizuka", lastname: "Minamoto", species: "Human", age: 10, gadgetId: null},
-        ]
-
-        const newGadget = await this.prisma.gadget.create({
+        await this.prisma.gadget.create({
             data: {
                 name: name,
                 type: type,
+                users: {
+                    create: users
+                }
             }
         });
-        
-        const users = userId.map(index => {
-            characters[index]["gadgetId"] = newGadget.id;
-            return characters[index];
-        })
-        
-        const newUsers = await this.prisma.character.createMany({
-            data: users
-        })
-        const newAdd = await this.prisma.gadget.findMany({take:-1, include:{users:true}});
-        
-        return Promise.resolve(newAdd);
+
+        const newGadget = this.getGadgetList(-1);
+        return Promise.resolve(newGadget);
     }
 
     // public async updateGadget(id: number, updateGadget:Gadget, owner: number, characters: Array<number>): Promise<Gadget> {
