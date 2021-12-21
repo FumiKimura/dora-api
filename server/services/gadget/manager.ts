@@ -42,7 +42,7 @@ class GadgetManager{
         return Promise.resolve(result);
     }
 
-    public async getGadgetById(id: number): Promise<Gadget[] | null> {
+    public async getGadgetById(id: number): Promise<Gadget | null> {
         const gadget = await this.prisma.gadget.findMany({
             where: {id:id},
             include: {
@@ -56,7 +56,7 @@ class GadgetManager{
         const result = gadget.map((user) => {
             return { ...user, users: user.users.map((user) => user.user) }
         });
-        return Promise.resolve(result);
+        return Promise.resolve(result[0]);
     }
 
     public async postNewGadget(name:string, type:string, userIds:number[]): Promise<Gadget[]>{
@@ -98,13 +98,28 @@ class GadgetManager{
     //     return Promise.resolve(update);
     // }
 
-    public async deleteGadget(id: number): Promise<Gadget> {
-        const deletedGadget = await this.prisma.gadget.delete({
+    public async deleteGadget(id: number): Promise<Gadget | null> {
+        const isIdExist = await this.getGadgetById(id);
+        if(isIdExist === undefined)return null;
+
+        await this.prisma.gadget.update({
+            data: {
+              users: {
+                deleteMany: {},
+              },
+            },
+            where: {
+              id: id,
+            },
+          })
+
+        const deleteGadget = await this.prisma.gadget.delete({
             where: {
                 id: id
             }
         })
-        return Promise.resolve(deletedGadget);
+
+        return Promise.resolve(deleteGadget);
     }
 }
 
