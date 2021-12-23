@@ -1,6 +1,5 @@
 import { Router, Request, Response } from "express";
 import GadgetManager from "./manager";
-import { Gadget } from "@prisma/client";
 
 
 class GadgetController {
@@ -68,10 +67,10 @@ class GadgetController {
             
             const name: string | undefined = req.body.name;
             const type: string | undefined = req.body.type; 
-            let users: {user:{connect:{id:number}}}[] | undefined;
+            let users: {id:number}[] | undefined;
             if(req.body.users !== undefined){
                 users = req.body.users.map((id: string) => {
-                    return {user:{connect:{id: parseInt(id)}}};
+                    return {id: parseInt(id)};
                 });
             }else {
                 users = undefined;
