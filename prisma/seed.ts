@@ -21,13 +21,13 @@ async function main() {
           name: "Time Machine", 
           type: "Hover craft",
             users: {
-              create:[
-                {user:{connect:{id:1}}},
-                {user:{connect:{id:2}}},
-                {user:{connect:{id:3}}},
-                {user:{connect:{id:5}}},
-                {user:{connect:{id:6}}},
-                {user:{connect:{id:7}}},
+              connect:[
+                {id: 1},
+                {id: 2},
+                {id: 3},
+                {id: 5},
+                {id: 6},
+                {id: 7},
               ]
             }
           },      
@@ -38,14 +38,14 @@ async function main() {
         name: "Big Light", 
         type: "Laser",
           users: {
-            create:[
-              {user:{connect:{id:1}}},
-              {user:{connect:{id:2}}},
-              {user:{connect:{id:3}}},
-              {user:{connect:{id:4}}},
-              {user:{connect:{id:5}}},
-              {user:{connect:{id:6}}},
-              {user:{connect:{id:7}}},
+            connect:[
+              {id: 1},
+              {id: 2},
+              {id: 3},
+              {id: 4},
+              {id: 5},
+              {id: 6},
+              {id: 7},
             ]
           }
         },      
@@ -56,14 +56,14 @@ async function main() {
         name: "Take-Copter", 
         type: "Mini-Helicopter",
           users: {
-            create:[
-              {user:{connect:{id:1}}},
-              {user:{connect:{id:2}}},
-              {user:{connect:{id:3}}},
-              {user:{connect:{id:4}}},
-              {user:{connect:{id:5}}},
-              {user:{connect:{id:6}}},
-              {user:{connect:{id:7}}},
+            connect:[
+              {id: 1},
+              {id: 2},
+              {id: 3},
+              {id: 4},
+              {id: 5},
+              {id: 6},
+              {id: 7},
             ]
           }
         },      
@@ -74,14 +74,14 @@ async function main() {
         name: "Anywhere Door", 
         type: "Door",
           users: {
-            create:[
-              {user:{connect:{id:1}}},
-              {user:{connect:{id:2}}},
-              {user:{connect:{id:3}}},
-              {user:{connect:{id:4}}},
-              {user:{connect:{id:5}}},
-              {user:{connect:{id:6}}},
-              {user:{connect:{id:7}}},
+            connect:[
+              {id: 1},
+              {id: 2},
+              {id: 3},
+              {id: 4},
+              {id: 5},
+              {id: 6},
+              {id: 7},
             ]
           }
         },      
@@ -92,12 +92,12 @@ async function main() {
         name: "Gravity Paint", 
         type: "Paint",
           users: {
-            create:[
-              {user:{connect:{id:1}}},
-              {user:{connect:{id:2}}},
-              {user:{connect:{id:5}}},
-              {user:{connect:{id:6}}},
-              {user:{connect:{id:7}}},
+            connect:[
+              {id: 1},
+              {id: 2},
+              {id: 5},
+              {id: 6},
+              {id: 7},
             ]
           }
         },      

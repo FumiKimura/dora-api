@@ -11,26 +11,17 @@ datasource db {
 }
 
 model Gadget {
-  id    Int                   @id @default(autoincrement())
-  name  String                @unique
+  id    Int         @id @default(autoincrement())
+  name  String      @unique
   type  String
-  users GadgetsOnCharacters[]
+  users Character[]
 }
 
 model Character {
-  id        Int                   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   firstname String
   lastname  String?
   species   String
   age       Int
-  gadgets   GadgetsOnCharacters[]
-}
-
-model GadgetsOnCharacters {
-  gadget   Gadget    @relation(fields: [gadgetId], references: [id])
-  gadgetId Int
-  user     Character @relation(fields: [userId], references: [id])
-  userId   Int
-
-  @@id([gadgetId, userId])
+  gadgets   Gadget[]
 }

@@ -88,6 +88,14 @@ class GadgetManager{
         data: {
             name: name,
             type: type,
+            users: {
+                set: [
+                    {gadgetId_userId: {
+                        gadgetId: id,
+                        userId: 2
+                    }},
+                ]
+            }
         },
         include: {
             users: {
