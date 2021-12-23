@@ -19,7 +19,7 @@ class GadgetController {
         router.get("/gadgetlist", this.getGadgetList);
         router.get("/gadgetbyid", this.getGadgetById);
         router.post("", this.postNewGadget);
-        // router.patch("", this.updateGadget);
+        router.patch("", this.updateGadget);
         router.delete("", this.deleteGadget);
         return router;
     }
@@ -61,26 +61,29 @@ class GadgetController {
         }
     }
 
-    // protected updateGadget = async (req: Request, res:Response): Promise<void> => {
-    //     try {
-    //         const updateInfo = new Gadget();
-    //         const id = req.query.id;
-    //         updateInfo.gadgetName = req.body.gadgetName; 
-    //         updateInfo.gadgetType = req.body.gadgetType;
-    //         const owner = parseInt(req.body.ownerId);
+    protected updateGadget = async (req: Request, res:Response): Promise<void> => {
+        try {
+            const id = req.query.id;
+            if(id === undefined) throw new Error("No ID in the query");
             
-    //         //Cannot append new character to gadget's user and delete specific a user
-    //         //New array of characters overwrites given gadgets users (array of characters)
-    //         let characters: Array<number>;
-    //         if(req.body.characters) characters = req.body.characters.map(id => parseInt(id));
+            const name: string | undefined = req.body.name;
+            const type: string | undefined = req.body.type; 
+            let users: {user:{connect:{id:number}}}[] | undefined;
+            if(req.body.users !== undefined){
+                users = req.body.users.map((id: string) => {
+                    return {user:{connect:{id: parseInt(id)}}};
+                });
+            }else {
+                users = undefined;
+            }    
             
-    //         const response = await this.manager.updateGadget(parseInt(id as string), updateInfo, owner, characters);
-    //         res.send(response);
-    //     }catch(e){
-    //         console.log(e);
-    //         res.sendStatus(404);
-    //     }
-    // }
+            const response = await this.manager.updateGadget(parseInt(id as string), name, type, users);
+            res.send(response);
+        }catch(e){
+            console.log(e);
+            res.send(e);
+        }
+    }
 
     protected deleteGadget = async (req: Request, res: Response): Promise<void> => {
         const id = req.query.id;

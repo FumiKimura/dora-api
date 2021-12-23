@@ -1,4 +1,5 @@
 import { PrismaClient, Gadget } from "@prisma/client";
+import e from "express";
 
 
 class GadgetManager{    
@@ -78,25 +79,31 @@ class GadgetManager{
         return Promise.resolve(newGadget);
     }
 
-    // public async updateGadget(id: number, updateGadget:Gadget, owner: number, characters: Array<number>): Promise<Gadget> {
-    //     const characterManager = new CharacterManager();
+    public async updateGadget(id: number, name: string | undefined, type: string | undefined, users: {user:{connect:{id:number}}}[] | undefined): Promise<Gadget> {
+        
+        const updateGadget = await this.prisma.gadget.update({
+        where: {
+            id: id,
+        },
+        data: {
+            name: name,
+            type: type,
+        },
+        include: {
+            users: {
+                include: {
+                    user:true
+                }
+            }
+        },
+        })
 
-    //     const update = await this.gadgetRepository.findOne({
-    //         relations:["owner","characters"],
-    //         where: {id:id}
-    //     });
+        const result = [updateGadget].map((user) => {
+            return { ...user, users: user.users.map((user) => user.user) }
+        })[0];
+        return Promise.resolve(result);
+    }
 
-    //     //Make it work for now. Refactor later.
-    //     if(updateGadget.gadgetName) update.gadgetName = updateGadget.gadgetName;
-    //     if(updateGadget.gadgetType) update.gadgetType = updateGadget.gadgetType;
-    //     if(owner) update.owner = await characterManager.getCharacterById(owner);
-    //     if(characters) update.characters = await Promise.all(characters.map(async (id) => {
-    //         return await characterManager.getCharacterById(id)
-    //     }));
-
-    //     await this.gadgetRepository.save(update);
-    //     return Promise.resolve(update);
-    // }
 
     public async deleteGadget(id: number): Promise<Gadget | null> {
         const isIdExist = await this.getGadgetById(id);
