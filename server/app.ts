@@ -1,4 +1,4 @@
-import express, {Application} from "express";
+import express, { Application } from "express";
 import cors from "cors";
 import RootController from "./services/root/controller";
 import GadgetController from "./services/gadget/controller";
