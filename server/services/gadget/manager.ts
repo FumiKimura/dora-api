@@ -1,6 +1,4 @@
 import { PrismaClient, Gadget } from "@prisma/client";
-import e from "express";
-
 
 class GadgetManager{    
     public prisma: PrismaClient;
