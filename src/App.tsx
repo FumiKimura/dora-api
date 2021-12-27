@@ -12,7 +12,7 @@ function App() {
   const [json, setJSON] = useState({});
 
   //Handler
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>){  
+  async function handleSubmit(event: React.MouseEvent<HTMLInputElement>){  
     event.preventDefault();
     let response;
     switch (request) {
@@ -55,6 +55,10 @@ function App() {
     setJSON(event.updated_src);
   }
 
+  const handleReset = (): void => {
+    setJSON({});
+  }
+
   //Root styling
   const rootStyle = {
     backgroundColor : 'lightblue',
@@ -64,15 +68,11 @@ function App() {
   //HTML
   return (
     <div className="App" style={rootStyle}>
-      <Navigation 
-        setJSON={setJSON}
-      />
+      <Navigation />
       <div className="doraemonBell">
       <div className="doraemonBell-horizontal-line"></div>
         <div className="doraemonBell-center">
-          <div className="doraemonBell-vertical-line">
-            
-          </div>
+          <div className="doraemonBell-vertical-line"></div>
         </div>
       </div>
       <h1 className="title">DORA API</h1>
@@ -81,16 +81,19 @@ function App() {
       You can interact with database via CRUD fucntionality
       </h4>
       <a className="docLink" href="https://github.com/FumiKimura/ccp2-sprint.solo-api">You can check DOCs here!!!</a>
-      <form onSubmit={handleSubmit}>
-        <select onChange={handleRequestChange}>
+      <form className="form">
+        <select className="dropdown-path" onChange={handleRequestChange}>
             <option value="GET">GET</option>
             <option value="POST">POST</option>
             <option value="PATCH">PATCH</option>
             <option value="DELETE">DELETE</option>
         </select>
         <input className="pathInput" type="text" id="path" onChange={handlePathChange}></input>
-        <input className="submitBtn" type="submit"></input>
       </form>
+      <div className="btn-container">
+        <input onClick={handleSubmit} className="submitBtn" type="submit"></input>
+        <input onClick={handleReset} className="resetBtn" type="reset"></input>
+      </div>
       <div className="jsonViewContainer">
         <div className="jsonViewContainerChild">
           <ReactJson src={json} onEdit={onEdit} onAdd={onAdd} onDelete={onDelete}></ReactJson>
