@@ -59,15 +59,9 @@ function App() {
     setJSON({});
   }
 
-  //Root styling
-  const rootStyle = {
-    backgroundColor : 'lightblue',
-    height : '100vh'
-  }
-
   //HTML
   return (
-    <div className="App" style={rootStyle}>
+    <div className="App">
       <Navigation />
       <div className="doraemonBell">
       <div className="doraemonBell-horizontal-line"></div>

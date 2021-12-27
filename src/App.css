@@ -1,5 +1,10 @@
-.App {
+html, body {
+  width: 100%;
+  height: 100%;
   background-color: lightblue;
+}
+
+.App {
   text-align: center;   
 }
 
@@ -49,12 +54,13 @@
 }
 
 .jsonViewContainer {
-  margin: 1em auto;
+  margin: 0.5em auto;
   padding: 1em;
   width: 75%;
 }
 
 .jsonViewContainerChild {
+  padding: 2em;
   text-align: left;
   overflow: scroll;
   height: 50vh;
