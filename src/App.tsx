@@ -75,7 +75,7 @@ function App() {
       <h4>All the Doraemon Gadget data you will need is here.<br />
       You can interact with database via CRUD fucntionality
       </h4>
-      <a className="docLink" href="https://github.com/FumiKimura/ccp2-sprint.solo-api">You can check DOCs here!!!</a>
+      <a className="docLink" href="https://github.com/FumiKimura/ccp2-sprint.solo-api" target="_blank"> API Documentations</a>
       <form className="form">
         <select className="dropdown-path" onChange={handleRequestChange}>
             <option value="GET">GET</option>
