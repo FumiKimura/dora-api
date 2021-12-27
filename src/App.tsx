@@ -17,19 +17,19 @@ function App() {
     let response;
     switch (request) {
       case "GET":
-        response = await axios.get("http://localhost:8080/" + apiPath);
+        response = await axios.get("https://doraemon-api.herokuapp.com/" + apiPath);
         setJSON(response.data);
         break;
       case "POST":
-        response = await axios.post("http://localhost:8080/" + apiPath, json);
+        response = await axios.post("https://doraemon-api.herokuapp.com/" + apiPath, json);
         setJSON(response.data);
         break;
       case "PATCH":
-        response = await axios.patch("http://localhost:8080/" + apiPath, json);
+        response = await axios.patch("https://doraemon-api.herokuapp.com/" + apiPath, json);
         setJSON(response.data);
         break;
       case "DELETE":
-        response = await axios.delete("http://localhost:8080/" + apiPath);
+        response = await axios.delete("https://doraemon-api.herokuapp.com/" + apiPath);
         setJSON(response.data);
         break;
     }

@@ -29,7 +29,7 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "npm run prisma-generate && npm run prisma-migrate && npm run prisma-seed && ts-node server/index.ts",
+    "start": "npm run prisma-generate && npm run prisma-migrate && ts-node server/index.ts",
     "prisma-generate": "npx prisma generate",
     "prisma-seed": "npx prisma db seed",
     "prisma-migrate": "npx prisma migrate deploy",
