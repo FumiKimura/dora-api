@@ -67,6 +67,14 @@ function App() {
       <Navigation 
         setJSON={setJSON}
       />
+      <div className="doraemonBell">
+      <div className="doraemonBell-horizontal-line"></div>
+        <div className="doraemonBell-center">
+          <div className="doraemonBell-vertical-line">
+            
+          </div>
+        </div>
+      </div>
       <h1 className="title">DORA API</h1>
       <h2>The RESTful Doraemon Gadget API</h2>
       <h4>All the Doraemon Gadget data you will need is here.<br />

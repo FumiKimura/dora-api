@@ -1,5 +1,6 @@
 .navigation {
-    height:75px;
+    position: relative;
+    height:100px;
     background-color: red;
     text-align: right;
 }
