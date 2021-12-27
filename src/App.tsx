@@ -73,7 +73,7 @@ function App() {
       <h1 className="title">DORA API</h1>
       <h2>The RESTful Doraemon Gadget API</h2>
       <h4>All the Doraemon Gadget data you will need is here.<br />
-      You can interact with database via CRUD fucntionality
+      You can interact with database via CRUD endpoints
       </h4>
       <a className="docLink" href="https://github.com/FumiKimura/ccp2-sprint.solo-api" target="_blank"> API Documentations</a>
       <form className="form">
