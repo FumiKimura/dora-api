@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactJson from 'react-json-view';
 import './App.css';
 import Navigation from './navigation/navigation';
+import Footer from './footer/footer'
 import axios from 'axios';
 
 function App() {
@@ -93,6 +94,7 @@ function App() {
           <ReactJson src={json} onEdit={onEdit} onAdd={onAdd} onDelete={onDelete}></ReactJson>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import './navigation.css';
+import "./navigation.css";
 
 function Navigation() {
   //Hooks
