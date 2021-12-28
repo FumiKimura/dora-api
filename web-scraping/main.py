@@ -14,22 +14,29 @@ driver = webdriver.Chrome(options=options, executable_path=DRIVER_PATH)
 
 
 def getGadgetList(URL):
-    try:
-        driver.get(URL)
-        soup = BeautifulSoup(driver.page_source, 'html.parser')
-        gadgetList = soup.find_all(
-            'a', attrs={'class': 'category-page__member-link'})
+    while True:
+        try:
+            driver.get(URL)
+            print(URL)
+            soup = BeautifulSoup(driver.page_source, 'html.parser')
+            gadgetList = soup.find_all(
+                'a', attrs={'class': 'category-page__member-link'})
 
-        for gadget in gadgetList:
-            detailPageURL = "https://doraemon.fandom.com" + gadget.get('href')
+            for gadget in gadgetList:
+                detailPageURL = "https://doraemon.fandom.com" + \
+                    gadget.get('href')
 
-            getDetailPageInfo(detailPageURL, driver)
+                # getDetailPageInfo(detailPageURL)
 
-    except Exception as e:
-        print(e)
+            nextButton = soup.find('a', attrs={
+                'class': 'category-page__pagination-next wds-button wds-is-secondary'})
+            URL = nextButton.get('href')
+        except Exception as e:
+            print('Finished')
+            break
 
 
-def getDetailPageInfo(URL, driver):
+def getDetailPageInfo(URL):
     driver.get(URL)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     name = soup.find(attrs={'id': 'firstHeading'}).text.strip()
@@ -37,5 +44,5 @@ def getDetailPageInfo(URL, driver):
     driver.back()
 
 
-getGadgetList(STARTING_URL, driver)
+getGadgetList(STARTING_URL)
 driver.quit()
