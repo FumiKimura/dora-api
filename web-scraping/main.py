@@ -25,8 +25,7 @@ def getGadgetList(URL):
             detailPageURL = "https://doraemon.fandom.com" + \
                 gadget.get('href')
 
-            getDetailPageInfo(detailPageURL)
-            break
+            saveDetailPage(detailPageURL)
 
         nextButton = soup.find('a', attrs={
             'class': 'category-page__pagination-next wds-button wds-is-secondary'})
@@ -36,6 +35,19 @@ def getGadgetList(URL):
             break
 
         URL = nextButton.get('href')
+
+
+def saveDetailPage(URL):
+    time.sleep(5)
+    driver.get(URL)
+    filename = URL.split("/")[-1]
+    print(filename)
+    save_path = "./raw-data"
+    completePath = os.path.join(save_path, f"{filename}.html")
+    directory = open(completePath, "w")
+    directory.write(driver.page_source)
+    directory.close()
+    driver.back()
 
 
 def getDetailPageInfo(URL):
