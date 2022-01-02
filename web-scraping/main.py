@@ -58,5 +58,5 @@ def getDetailPageInfo(URL):
     driver.back()
 
 
-getGadgetList(STARTING_URL)
-driver.quit()
+# getGadgetList(STARTING_URL)
+# driver.quit()
